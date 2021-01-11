@@ -3,6 +3,7 @@ package com.faircorp.model
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,8 @@ class RoomAdapter (val listener: OnRoomSelectedListner) : RecyclerView.Adapter<R
         val windowOpen: TextView = view.findViewById(R.id.txt_window_open)
         val switchWindow: Switch=view.findViewById(R.id.swt_window_room)
         val swtichHeater: Switch=view.findViewById(R.id.swt_heater_room)
+        val btnShowWindow: Button=view.findViewById(R.id.btn_show_windows)
+        val btnShowHeater: Button=view.findViewById(R.id.btn_show_heaters)
     }
 
     private val items = mutableListOf<RoomDto>() // (3)
@@ -41,14 +44,15 @@ class RoomAdapter (val listener: OnRoomSelectedListner) : RecyclerView.Adapter<R
         val room = items[position]
         holder.apply {
             name.text = room.name
-            currentTemp.text = room.currentTemperature.toString()
-            floor.text = room.floor
-//            heaterOn
-//            windowOpen
-//            room.text = window.room.name
+            currentTemp.text = room.currentTemperature.toString()+": ℃"
+            floor.text = room.floor+"Fl"
+            heaterOn.text=room.noOfOnHeater.toString()+": On"
+            windowOpen.text=room.noOfOpenWindow.toString()+": Open"
             itemView.setOnClickListener { listener.onRoomSelected(room.id) }
             switchWindow.setOnClickListener{listener.onRoomWindowSwitchClicked(room.id, switchWindow.isChecked)}
             swtichHeater.setOnClickListener{listener.onRoomHeaterSwitchClicked(room.id, switchWindow.isChecked)}
+            btnShowWindow.setOnClickListener{listener.onRoomShowWindowsClicked(room.id)}
+            btnShowHeater.setOnClickListener{listener.onRoomShowHeaterClicked(room.id)}
         }
     }
     override fun onViewRecycled(holder: RoomViewHolder) { // (2)
@@ -58,4 +62,5 @@ class RoomAdapter (val listener: OnRoomSelectedListner) : RecyclerView.Adapter<R
         }
 
     }
+
 }

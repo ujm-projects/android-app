@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 //Defining Application name to make unique intent extras
 const val WINDOW_NAME_PARAM = "com.faircorp.windowname.attribute"
+
 class MainActivity : BasicActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

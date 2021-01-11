@@ -61,7 +61,7 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
             }
         }else{
             GlobalScope.launch(context = Dispatchers.IO) {
-                runCatching { ApiServices().windowsApiService.findAll().execute() }
+                runCatching { ApiServices().windowsApiService.findAllByRoom(ROOM_ID_PARAM.toLong()).execute() }
                     .onSuccess {
                         withContext(context = Dispatchers.Main) {
                             adapter.update(it.body() ?: emptyList())

@@ -129,8 +129,16 @@ class RoomsActivity : BasicActivity() , OnRoomSelectedListner {
     }
 
     override fun onRoomSelected(id: Long) {
-        val intent = Intent(this, WindowActivity::class.java)
-            .putExtra(WINDOW_NAME_PARAM, id)
+
+    }
+    override fun onRoomShowHeaterClicked(id: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onRoomShowWindowsClicked(id: Long) {
+        val intent = Intent(this, WindowsActivity::class.java)
+            .putExtra(ROOM_ID_PARAM, id.toString())
         startActivity(intent)
     }
+
 }

@@ -16,4 +16,8 @@ interface WindowApiService {
 
     @PUT("window/{id}")
     fun updateWindow(@Path("id") id: Long, @Body window: WindowDto): Call<WindowDto>
+
+    @GET("window/byRoom/{roomId}")
+    fun findAllByRoom(@Path("roomId") id: Long): Call<List<WindowDto>>
+
 }
