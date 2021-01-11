@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Faircorp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BuildingList"></activity>
+        <activity android:name=".RoomsActivity"></activity>
+        <activity android:name=".BuildingList" />
         <activity android:name=".WindowsActivity" />
         <activity android:name=".BuildingWindowListActivity" />
         <activity

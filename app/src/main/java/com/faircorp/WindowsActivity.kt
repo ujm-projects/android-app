@@ -11,7 +11,7 @@ import com.faircorp.service.ApiServices
 import com.faircorp.model.WindowAdapter
 import com.faircorp.service.WindowService
 import kotlinx.coroutines.*
-const val BUILDING_ID_PARAM = "0"
+const val ROOM_ID_PARAM = "0"
 class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
 
     val windowService = WindowService()
@@ -41,7 +41,7 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
 //                Toast.makeText(this, "Error on windows loading $it", Toast.LENGTH_LONG).show()  // (3)
 //        }
 
-        if(BUILDING_ID_PARAM == "0") {
+        if(ROOM_ID_PARAM == "0") {
             GlobalScope.launch(context = Dispatchers.IO) {
                 runCatching { ApiServices().windowsApiService.findAll().execute() }
                     .onSuccess {

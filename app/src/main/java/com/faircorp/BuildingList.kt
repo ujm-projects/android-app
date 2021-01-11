@@ -28,9 +28,6 @@ class BuildingList : BasicActivity() , OnBuildingSelectedListener {
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
-
-
-
         GlobalScope.launch (context = Dispatchers.IO) {
             runCatching { ApiServices().buildingApiService.findAll().execute() }
                 .onSuccess {
@@ -51,7 +48,7 @@ class BuildingList : BasicActivity() , OnBuildingSelectedListener {
     }
 
     override fun onBuildingSelected(id: Long) {
-        val intent =  Intent(this, WindowsActivity::class.java).putExtra(BUILDING_ID_PARAM, id);
+        val intent =  Intent(this, RoomsActivity::class.java).putExtra(BUILDING_ID_PARAM,id.toString());
 //        val intent = Intent(this, WindowActivity::class.java).putExtra(WINDOW_NAME_PARAM, id)
         startActivity(intent)
     }
