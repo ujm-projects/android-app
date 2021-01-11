@@ -2,7 +2,7 @@ package com.faircorp
 
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -28,6 +28,9 @@ open class BasicActivity : AppCompatActivity(){
             )
             R.id.menu_email -> startActivity(
                 Intent(Intent.ACTION_SENDTO, Uri.parse("mailto://dhayanthdharma@gmail.com"))
+            )
+            R.id.menu_building -> startActivity(
+                Intent(this, BuildingList::class.java)
             )
         }
         return super.onContextItemSelected(item)

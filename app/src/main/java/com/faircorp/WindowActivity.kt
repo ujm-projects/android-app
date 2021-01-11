@@ -1,10 +1,9 @@
 package com.faircorp
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
-import com.faircorp.model.ApiServices
+import com.faircorp.service.ApiServices
 import com.faircorp.model.WindowDto
 import com.faircorp.service.WindowService
 import kotlinx.coroutines.Dispatchers

@@ -7,10 +7,11 @@
     <string name="act_main_open_window">Open window</string>
     <string name="act_window_list_title">Building windows</string>
     <string name="menu_windows">Building windows</string>
+    <string name="menu_building">Building List</string>
     <string name="menu_website">Our website</string>
     <string name="menu_email">Send us an email</string>
 
-<!--    Window Activity Strins-->
+    <!--    Window Activity Strins-->
     <string name="act_window_name">Window name</string>
     <string name="act_window_room">Room</string>
     <string name="act_window_room_target_temp">Target room temperature</string>

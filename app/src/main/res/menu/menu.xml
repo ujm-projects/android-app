@@ -13,4 +13,8 @@
         android:id="@+id/menu_email"
         android:title="@string/menu_email"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_building"
+        android:title="@string/menu_building"
+        app:showAsAction="never" />
 </menu>

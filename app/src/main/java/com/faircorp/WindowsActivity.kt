@@ -1,21 +1,19 @@
 package com.faircorp
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.widget.Toast
-import androidx.lifecycle.coroutineScope
 import com.faircorp.`interface`.OnWindowSelectedListener
-import com.faircorp.model.ApiServices
+import com.faircorp.service.ApiServices
 import com.faircorp.model.WindowAdapter
 import com.faircorp.service.WindowService
-import androidx.lifecycle.lifecycleScope;
 import kotlinx.coroutines.*
-
+const val BUILDING_ID_PARAM = "0"
 class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
+
     val windowService = WindowService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +22,14 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
         val recyclerView = findViewById<RecyclerView>(R.id.list_windows) // (2)
         val adapter = WindowAdapter(this) // (3)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recyclerView.layoutManager =
+            LinearLayoutManager(this)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
@@ -37,8 +41,9 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
 //                Toast.makeText(this, "Error on windows loading $it", Toast.LENGTH_LONG).show()  // (3)
 //        }
 
-        GlobalScope.launch(context = Dispatchers.IO) {
-            runCatching { ApiServices().windowsApiService.findAll().execute() }
+        if(BUILDING_ID_PARAM == "0") {
+            GlobalScope.launch(context = Dispatchers.IO) {
+                runCatching { ApiServices().windowsApiService.findAll().execute() }
                     .onSuccess {
                         withContext(context = Dispatchers.Main) {
                             adapter.update(it.body() ?: emptyList())
@@ -47,13 +52,33 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
                     .onFailure {
                         withContext(context = Dispatchers.Main) { // (3)
                             Toast.makeText(
-                                    applicationContext,
-                                    "Error on windows loading $it",
-                                    Toast.LENGTH_LONG
+                                applicationContext,
+                                "Error on windows loading $it",
+                                Toast.LENGTH_LONG
                             ).show()
                         }
                     }
+            }
+        }else{
+            GlobalScope.launch(context = Dispatchers.IO) {
+                runCatching { ApiServices().windowsApiService.findAll().execute() }
+                    .onSuccess {
+                        withContext(context = Dispatchers.Main) {
+                            adapter.update(it.body() ?: emptyList())
+                        }
+                    }
+                    .onFailure {
+                        withContext(context = Dispatchers.Main) { // (3)
+                            Toast.makeText(
+                                applicationContext,
+                                "Error on windows loading $it",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+            }
         }
+
 
 
 
