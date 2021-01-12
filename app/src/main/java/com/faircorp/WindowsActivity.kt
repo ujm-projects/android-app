@@ -42,7 +42,7 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
 //                Toast.makeText(this, "Error on windows loading $it", Toast.LENGTH_LONG).show()  // (3)
 //        }
 
-        if(param.equals(0)) {
+        if(param.equals(0L)) {
             GlobalScope.launch(context = Dispatchers.IO) {
                 runCatching { ApiServices().windowsApiService.findAll().execute() }
                     .onSuccess {
@@ -79,15 +79,18 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
                     }
             }
         }
+    }
 
+    override fun onWindowSelected(id: Long) {
+        val intent = Intent(this, WindowActivity::class.java).putExtra(WINDOW_NAME_PARAM, id)
+        startActivity(intent)
+    }
 
-
-
-//LifeCycleScope is not defined WWHYYYYYYYYYYYYYYYYYYY
-//        lifecycleScope.launch(context = Dispatchers.IO) { // (1)
-//            runCatching { ApiServices().windowsApiService.findAll().execute() } // (2)
+    override fun onWindowStatusSwitch(id: Long, isChecked: Boolean) {
+//        GlobalScope.launch(context = Dispatchers.IO) {
+//            runCatching { ApiServices().windowsApiService.(param).execute() }
 //                    .onSuccess {
-//                        withContext(context = Dispatchers.Main) { // (3)
+//                        withContext(context = Dispatchers.Main) {
 //                            adapter.update(it.body() ?: emptyList())
 //                        }
 //                    }
@@ -101,12 +104,5 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
 //                        }
 //                    }
 //        }
-
-
-    }
-
-    override fun onWindowSelected(id: Long) {
-        val intent = Intent(this, WindowActivity::class.java).putExtra(WINDOW_NAME_PARAM, id)
-        startActivity(intent)
     }
 }

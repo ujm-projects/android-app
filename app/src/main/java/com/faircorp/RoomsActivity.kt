@@ -41,7 +41,7 @@ class RoomsActivity : BasicActivity() , OnRoomSelectedListner {
         recyclerView.adapter = adapter
 
 
-        if(param.equals(0)){
+        if(param.equals(0L)){
             GlobalScope.launch(context = Dispatchers.IO) {
                 runCatching { ApiServices().roomApiService.findAll().execute() }
                     .onSuccess {

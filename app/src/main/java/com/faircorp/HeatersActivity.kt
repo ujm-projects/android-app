@@ -35,7 +35,7 @@ class HeatersActivity : BasicActivity() , OnHeaterEventListner {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
-        if(param.equals(0) ) {
+        if(param ==0L ) {
             GlobalScope.launch(context = Dispatchers.IO) {
                 runCatching { ApiServices().heaterApiServer.findAll().execute() }
                     .onSuccess {

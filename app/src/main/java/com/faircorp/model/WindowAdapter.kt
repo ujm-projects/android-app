@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
 import com.faircorp.R
 import com.faircorp.`interface`.OnWindowSelectedListener
@@ -14,6 +15,8 @@ class WindowAdapter(val listener: OnWindowSelectedListener) : RecyclerView.Adapt
         val name: TextView = view.findViewById(R.id.txt_windows_name)
         val room: TextView = view.findViewById(R.id.txt_window_room)
         val status: TextView = view.findViewById(R.id.txt_status)
+        val floor:TextView=view.findViewById(R.id.txt_floow_wa)
+        val swtWIndowStatus:Switch=view.findViewById(R.id.swt_window_status_wa)
     }
 
     private val items = mutableListOf<WindowDto>() // (3)
@@ -36,8 +39,10 @@ class WindowAdapter(val listener: OnWindowSelectedListener) : RecyclerView.Adapt
         val window = items[position]
         holder.apply {
             name.text = window.name
-            status.text = window.windowStatus.toString()
-//            room.text = window.room.name
+            status.text =window.windowStatus.toString()
+            room.text ="ROOM :"+ window.room?.name
+            floor.text="FLOOR :"+window.room?.floor
+            swtWIndowStatus.setOnClickListener{listener.onWindowStatusSwitch(window.id, swtWIndowStatus.isChecked)}
             itemView.setOnClickListener { listener.onWindowSelected(window.id) }
         }
     }
