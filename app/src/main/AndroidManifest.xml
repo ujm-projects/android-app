@@ -12,11 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Faircorp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HeatersActivity"></activity>
-        <activity android:name=".RoomsActivity" />
-        <activity android:name=".BuildingList" />
-        <activity android:name=".WindowsActivity" />
-        <activity android:name=".BuildingWindowListActivity" />
+        <activity android:name=".CreateRoomActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".HeatersActivity"
+            android:parentActivityName=".RoomsActivity"/>
+        <activity android:name=".RoomsActivity"
+            android:parentActivityName=".BuildingList"/>
+        <activity android:name=".BuildingList"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".WindowsActivity"
+            android:parentActivityName=".RoomsActivity"/>
+        <activity android:name=".BuildingWindowListActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".WindowActivity"
             android:parentActivityName=".MainActivity" />

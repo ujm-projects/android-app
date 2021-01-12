@@ -25,6 +25,7 @@ class RoomsActivity : BasicActivity() , OnRoomSelectedListner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rooms)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val recyclerView = findViewById<RecyclerView>(R.id.list_rooms)
         val adapter = RoomAdapter(this)
 

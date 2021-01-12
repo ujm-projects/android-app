@@ -17,18 +17,18 @@ class MainActivity : BasicActivity() {
     }
 
     /** Called when the user taps the button */
-    fun openWindow(view: View) {
-        // Extract value filled in editext identified with txt_window_name id
-        val windowName = findViewById<EditText>(R.id.txt_window_name).text.toString()
-        // Display a message
-        Toast.makeText(this, "You choose $windowName", Toast.LENGTH_LONG).show()
-
-        // Starting a intent to launch another activity
-        val intent = Intent(this, WindowActivity::class.java).apply {
-            putExtra(WINDOW_NAME_PARAM, windowName)
-        }
-        startActivity(intent)
-    }
+//    fun openWindow(view: View) {
+//        // Extract value filled in editext identified with txt_window_name id
+//        val windowName = findViewById<EditText>(R.id.txt_window_name).text.toString()
+//        // Display a message
+//        Toast.makeText(this, "You choose $windowName", Toast.LENGTH_LONG).show()
+//
+//        // Starting a intent to launch another activity
+//        val intent = Intent(this, WindowActivity::class.java).apply {
+//            putExtra(WINDOW_NAME_PARAM, windowName)
+//        }
+//        startActivity(intent)
+//    }
 
 
     fun openBuildingActivity(view: View) {
@@ -44,6 +44,11 @@ class MainActivity : BasicActivity() {
     fun openRoomsActivity(view: View) {
         startActivity(
             Intent(this, RoomsActivity::class.java)
+        )
+    }
+    fun openCreateRoomsActivity(view: View) {
+        startActivity(
+            Intent(this, CreateRoomActivity::class.java)
         )
     }
     fun openHeaterActivity(view: View) {

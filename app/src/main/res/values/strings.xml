@@ -8,6 +8,7 @@
     <string name="act_window_list_title">Building windows</string>
     <string name="menu_windows">Building windows</string>
     <string name="menu_building">Building List</string>
+    <string name="menu_home">Home</string>
     <string name="menu_website">Our website</string>
     <string name="menu_email">Send us an email</string>
 
@@ -25,4 +26,10 @@
     <string name="act_btn_show_room">SHOW ROOM</string>
     <string name="act_btn_show_building">SHOW BUILDING</string>
 
+
+    <!--    Create Room Activity Strings-->
+    <string name="act_ca_txt_ca_title">CREATE ROOM</string>
+    <string name="act_ca_btn_create">CREATE ROOM</string>
+<!--    <string name="act_btn_show_room">SHOW ROOM</string>-->
+<!--    <string name="act_btn_show_building">SHOW BUILDING</string>-->
 </resources>
