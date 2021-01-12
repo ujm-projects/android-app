@@ -28,6 +28,7 @@ class RoomsActivity : BasicActivity() , OnRoomSelectedListner {
         val recyclerView = findViewById<RecyclerView>(R.id.list_rooms)
         val adapter = RoomAdapter(this)
 
+        val param = intent.getLongExtra(BUILDING_ID_PARAM,0)
         recyclerView.layoutManager =
             LinearLayoutManager(this)
         recyclerView.addItemDecoration(
@@ -39,7 +40,8 @@ class RoomsActivity : BasicActivity() , OnRoomSelectedListner {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
-        if(BUILDING_ID_PARAM.equals("0")){
+
+        if(param.equals(0)){
             GlobalScope.launch(context = Dispatchers.IO) {
                 runCatching { ApiServices().roomApiService.findAll().execute() }
                     .onSuccess {
@@ -59,14 +61,15 @@ class RoomsActivity : BasicActivity() , OnRoomSelectedListner {
             }
         }else{
             GlobalScope.launch(context = Dispatchers.IO) {
-                runCatching { ApiServices().roomApiService.findAllByBuildingId(BUILDING_ID_PARAM.toLong()).execute() }
+
+                runCatching { ApiServices().roomApiService.findAllByBuildingId(param).execute() }
                     .onSuccess {
                         withContext(context = Dispatchers.Main) {
                             adapter.update(it.body() ?: emptyList())
                         }
                     }
                     .onFailure {
-                        withContext(context = Dispatchers.Main) { // (3)
+                        withContext(context = Dispatchers.Main) {
                             Toast.makeText(
                                 applicationContext,
                                 "Error on getting room list : $it",
@@ -86,7 +89,7 @@ class RoomsActivity : BasicActivity() , OnRoomSelectedListner {
                     withContext(context = Dispatchers.Main) {
                         Toast.makeText(
                             applicationContext,
-                            "ROOM HEATERS STATUS SUCCESSFULLY UPDATED",
+                            "SUCCESSFULLY UPDATED: HEATER_ON  ${it.body()?.noOfOnHeater}",
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -111,7 +114,7 @@ class RoomsActivity : BasicActivity() , OnRoomSelectedListner {
                     withContext(context = Dispatchers.Main) {
                         Toast.makeText(
                             applicationContext,
-                            "ROOM WINDOWS STATUS SUCCESSFULLY UPDATED",
+                            "SUCCESSFULLY UPDATED: OPEN_WINDOW  ${it.body()?.noOfOpenWindow}",
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -132,12 +135,14 @@ class RoomsActivity : BasicActivity() , OnRoomSelectedListner {
 
     }
     override fun onRoomShowHeaterClicked(id: Long) {
-        TODO("Not yet implemented")
+        val intent = Intent(this, HeatersActivity::class.java)
+            .putExtra(ROOM_ID_PARAM_, id)
+        startActivity(intent)
     }
 
     override fun onRoomShowWindowsClicked(id: Long) {
         val intent = Intent(this, WindowsActivity::class.java)
-            .putExtra(ROOM_ID_PARAM, id.toString())
+            .putExtra(ROOM_ID_PARAM, id)
         startActivity(intent)
     }
 

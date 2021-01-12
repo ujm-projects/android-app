@@ -28,5 +28,12 @@ class ApiServices {
                 .build()
                 .create(RoomApiService::class.java)
         }
+        val heaterApiServer : HeaterApiService by lazy {
+            Retrofit.Builder()
+                .addConverterFactory(MoshiConverterFactory.create())
+                .baseUrl(api_url)
+                .build()
+                .create(HeaterApiService::class.java)
+        }
 
 }

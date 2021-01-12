@@ -50,7 +50,7 @@ class RoomAdapter (val listener: OnRoomSelectedListner) : RecyclerView.Adapter<R
             windowOpen.text=room.noOfOpenWindow.toString()+": Open"
             itemView.setOnClickListener { listener.onRoomSelected(room.id) }
             switchWindow.setOnClickListener{listener.onRoomWindowSwitchClicked(room.id, switchWindow.isChecked)}
-            swtichHeater.setOnClickListener{listener.onRoomHeaterSwitchClicked(room.id, switchWindow.isChecked)}
+            swtichHeater.setOnClickListener{listener.onRoomHeaterSwitchClicked(room.id, swtichHeater.isChecked)}
             btnShowWindow.setOnClickListener{listener.onRoomShowWindowsClicked(room.id)}
             btnShowHeater.setOnClickListener{listener.onRoomShowHeaterClicked(room.id)}
         }

@@ -29,4 +29,26 @@ class MainActivity : BasicActivity() {
         }
         startActivity(intent)
     }
+
+
+    fun openBuildingActivity(view: View) {
+        startActivity(
+            Intent(this, BuildingList::class.java)
+        )
+    }
+    fun openWindowsActivity(view: View) {
+        startActivity(
+            Intent(this, WindowsActivity::class.java)
+        )
+    }
+    fun openRoomsActivity(view: View) {
+        startActivity(
+            Intent(this, RoomsActivity::class.java)
+        )
+    }
+    fun openHeaterActivity(view: View) {
+        startActivity(
+            Intent(this, HeatersActivity::class.java)
+        )
+    }
 }

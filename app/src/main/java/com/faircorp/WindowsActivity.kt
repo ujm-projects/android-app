@@ -21,6 +21,7 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
         setContentView(R.layout.activity_windows)
         val recyclerView = findViewById<RecyclerView>(R.id.list_windows) // (2)
         val adapter = WindowAdapter(this) // (3)
+        val param = intent.getLongExtra(ROOM_ID_PARAM,0)
 
         recyclerView.layoutManager =
             LinearLayoutManager(this)
@@ -41,7 +42,7 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
 //                Toast.makeText(this, "Error on windows loading $it", Toast.LENGTH_LONG).show()  // (3)
 //        }
 
-        if(ROOM_ID_PARAM == "0") {
+        if(param.equals(0)) {
             GlobalScope.launch(context = Dispatchers.IO) {
                 runCatching { ApiServices().windowsApiService.findAll().execute() }
                     .onSuccess {
@@ -61,7 +62,7 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
             }
         }else{
             GlobalScope.launch(context = Dispatchers.IO) {
-                runCatching { ApiServices().windowsApiService.findAllByRoom(ROOM_ID_PARAM.toLong()).execute() }
+                runCatching { ApiServices().windowsApiService.findAllByRoom(param).execute() }
                     .onSuccess {
                         withContext(context = Dispatchers.Main) {
                             adapter.update(it.body() ?: emptyList())

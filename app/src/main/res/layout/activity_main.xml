@@ -56,4 +56,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_window_name"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/btn_show_building"
+        android:layout_width="295dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="58dp"
+        android:onClick="openBuildingActivity"
+        android:text="@string/act_btn_show_building"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_window_name" />
+
+    <Button
+        android:id="@+id/btn_show_room"
+        android:layout_width="283dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:onClick="openRoomsActivity"
+        android:text="@string/act_btn_show_room"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_show_building" />
+
+    <Button
+        android:id="@+id/btn_show_windows_main"
+        android:layout_width="284dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:onClick="openWindowsActivity"
+        android:text="@string/act_btn_show_window"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_show_room" />
+
+    <Button
+        android:id="@+id/btn_show_heater_main"
+        android:layout_width="281dp"
+        android:layout_height="37dp"
+        android:onClick="openHeaterActivity"
+        android:text="@string/act_btn_show_heater"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="484dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
