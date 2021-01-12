@@ -21,7 +21,7 @@ class HeatersActivity : BasicActivity() , OnHeaterEventListner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heaters)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val param = intent.getLongExtra(ROOM_ID_PARAM_,0)
         val recyclerView = findViewById<RecyclerView>(R.id.list_heaters)
         val adapter = HeaterAdapter(this)

@@ -20,7 +20,7 @@ class BuildingList : BasicActivity() , OnBuildingSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_building_list)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val recyclerView = findViewById<RecyclerView>(R.id.building_list)
         val adapter = BuildingAdapterView(this)
 

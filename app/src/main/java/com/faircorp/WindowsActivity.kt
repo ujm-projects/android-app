@@ -21,6 +21,7 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_windows)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val recyclerView = findViewById<RecyclerView>(R.id.list_windows) // (2)
         val adapter = WindowAdapter(this) // (3)
         val param = intent.getLongExtra(ROOM_ID_PARAM,0)

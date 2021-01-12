@@ -32,6 +32,9 @@ open class BasicActivity : AppCompatActivity(){
             R.id.menu_building -> startActivity(
                 Intent(this, BuildingList::class.java)
             )
+            R.id.menu_home -> startActivity(
+                Intent(this,MainActivity::class.java)
+            )
         }
         return super.onContextItemSelected(item)
     }
