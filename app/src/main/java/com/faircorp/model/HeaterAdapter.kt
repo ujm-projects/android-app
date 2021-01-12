@@ -15,6 +15,8 @@ class HeaterAdapter(val listener: OnHeaterEventListner) : RecyclerView.Adapter<H
         val name: TextView = view.findViewById(R.id.txt_heater_name)
         val status: TextView = view.findViewById(R.id.txt_heater_status)
         val btnHeaterStatus: Switch = view.findViewById(R.id.swt_heater_status)
+        val currentTemp: TextView=view.findViewById(R.id.txt_current_temp_ha)
+        val roomName: TextView=view.findViewById(R.id.txt_room_name_ha)
     }
 
     private val items = mutableListOf<HeaterDto>()
@@ -35,11 +37,20 @@ class HeaterAdapter(val listener: OnHeaterEventListner) : RecyclerView.Adapter<H
     override fun onBindViewHolder(holder: HeaterViewHolder, position: Int) {
         val heater = items[position]
         holder.apply {
+            if(heater.heaterStatus==HeaterStatus.ON){
+                btnHeaterStatus.text="OFF";
+                btnHeaterStatus.setChecked(true);
+            }else{
+                btnHeaterStatus.text="ON";
+                btnHeaterStatus.setChecked(false);
+            }
+
             name.text = heater.name
             status.text = heater.heaterStatus.toString()
-//            room.text = window.room.name
+            roomName.text = heater.room?.name
+            currentTemp.text=heater.room?.currentTemperature.toString()
             itemView.setOnClickListener { listener.onHeaterSelected(heater.id) }
-            btnHeaterStatus.setOnClickListener{listener.onHeaterSwitchChange(heater.id,btnHeaterStatus.isChecked)}
+            btnHeaterStatus.setOnClickListener{listener.onHeaterSwitchChange(heater.id,btnHeaterStatus.isChecked, btnHeaterStatus)}
         }
     }
     override fun onViewRecycled(holder: HeaterViewHolder) {

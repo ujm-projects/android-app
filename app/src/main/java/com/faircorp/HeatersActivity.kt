@@ -2,12 +2,14 @@ package com.faircorp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Switch
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.faircorp.`interface`.OnHeaterEventListner
 import com.faircorp.model.HeaterAdapter
+import com.faircorp.model.HeaterStatus
 import com.faircorp.model.RoomAdapter
 import com.faircorp.service.ApiServices
 import kotlinx.coroutines.Dispatchers
@@ -78,8 +80,15 @@ class HeatersActivity : BasicActivity() , OnHeaterEventListner {
         TODO("Not yet implemented")
     }
 
-    override fun onHeaterSwitchChange(id: Long, status: Boolean) {
+    override fun onHeaterSwitchChange(id: Long, status: Boolean, switch:Switch) {
         val status=if(status) 1 else 0
+        if(switch.isChecked){
+            switch.text="OFF";
+        }else{
+            switch.text="ON";
+        }
+
+
         GlobalScope.launch(context = Dispatchers.IO) {
             runCatching { ApiServices().heaterApiServer.switchHeater(id, status).execute() }
                 .onSuccess {

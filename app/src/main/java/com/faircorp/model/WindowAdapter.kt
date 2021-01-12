@@ -42,7 +42,14 @@ class WindowAdapter(val listener: OnWindowSelectedListener) : RecyclerView.Adapt
             status.text =window.windowStatus.toString()
             room.text ="ROOM :"+ window.room?.name
             floor.text="FLOOR :"+window.room?.floor
-            swtWIndowStatus.setOnClickListener{listener.onWindowStatusSwitch(window.id, swtWIndowStatus.isChecked)}
+            if(window.windowStatus==Status.OPEN){
+                swtWIndowStatus.text="CLOSE";
+                swtWIndowStatus.setChecked(true);
+            }else{
+                swtWIndowStatus.text="OPEN";
+                swtWIndowStatus.setChecked(false);
+            }
+            swtWIndowStatus.setOnClickListener{listener.onWindowStatusSwitch(window.id, swtWIndowStatus.isChecked, swtWIndowStatus)}
             itemView.setOnClickListener { listener.onWindowSelected(window.id) }
         }
     }

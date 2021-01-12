@@ -2,11 +2,13 @@ package com.faircorp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Switch
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Toast
 import com.faircorp.`interface`.OnWindowSelectedListener
+import com.faircorp.model.Status
 import com.faircorp.service.ApiServices
 import com.faircorp.model.WindowAdapter
 import com.faircorp.service.WindowService
@@ -85,24 +87,33 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
         val intent = Intent(this, WindowActivity::class.java).putExtra(WINDOW_NAME_PARAM, id)
         startActivity(intent)
     }
-
-    override fun onWindowStatusSwitch(id: Long, isChecked: Boolean) {
-//        GlobalScope.launch(context = Dispatchers.IO) {
-//            runCatching { ApiServices().windowsApiService.(param).execute() }
-//                    .onSuccess {
-//                        withContext(context = Dispatchers.Main) {
-//                            adapter.update(it.body() ?: emptyList())
-//                        }
-//                    }
-//                    .onFailure {
-//                        withContext(context = Dispatchers.Main) { // (3)
-//                            Toast.makeText(
-//                                    applicationContext,
-//                                    "Error on windows loading $it",
-//                                    Toast.LENGTH_LONG
-//                            ).show()
-//                        }
-//                    }
-//        }
+    override fun onWindowStatusSwitch(id: Long, isChecked: Boolean,switch: Switch  ) {
+        val status=if(isChecked) 1 else 0
+        if(switch.isChecked){
+            switch.text="CLOSE";
+        }else{
+            switch.text="OPEN";
+        }
+        GlobalScope.launch(context = Dispatchers.IO) {
+            runCatching { ApiServices().windowsApiService.swtichWindowStatus(id, status).execute() }
+                    .onSuccess {
+                        withContext(context = Dispatchers.Main) {
+                            Toast.makeText(
+                                    applicationContext,
+                                    "SUCCESSFULLY UPDATED THE WINDOW STATUS : ${it.body()?.windowStatus}",
+                                    Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                    .onFailure {
+                        withContext(context = Dispatchers.Main) { // (3)
+                            Toast.makeText(
+                                    applicationContext,
+                                    "Error on windows loading $it",
+                                    Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+        }
     }
 }
