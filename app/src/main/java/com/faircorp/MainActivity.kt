@@ -1,13 +1,14 @@
 package com.faircorp
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 //Defining Application name to make unique intent extras
 const val WINDOW_NAME_PARAM = "com.faircorp.windowname.attribute"
+
 class MainActivity : BasicActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,5 +28,27 @@ class MainActivity : BasicActivity() {
             putExtra(WINDOW_NAME_PARAM, windowName)
         }
         startActivity(intent)
+    }
+
+
+    fun openBuildingActivity(view: View) {
+        startActivity(
+            Intent(this, BuildingList::class.java)
+        )
+    }
+    fun openWindowsActivity(view: View) {
+        startActivity(
+            Intent(this, WindowsActivity::class.java)
+        )
+    }
+    fun openRoomsActivity(view: View) {
+        startActivity(
+            Intent(this, RoomsActivity::class.java)
+        )
+    }
+    fun openHeaterActivity(view: View) {
+        startActivity(
+            Intent(this, HeatersActivity::class.java)
+        )
     }
 }
